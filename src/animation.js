@@ -110,12 +110,8 @@
   const P2 = [435,75,285];
   const P3 = [500,285,145];
 
-  function setCircle(id, world) {
-    const p = iso(...world);
-    const e = $(id);
-    e.setAttribute("cx", p.x);
-    e.setAttribute("cy", p.y);
-    return p;
+  function setCircle(world) {
+    return iso(...world);
   }
 
   // Obelisk dimensions. It starts completely flat on the ground and rotates
@@ -190,9 +186,9 @@
   }
 
   function setRopes(theta, head) {
-    const p1 = setCircle("p1",P1);
-    const p2 = setCircle("p2",P2);
-    const p3 = setCircle("p3",P3);
+    const p1 = setCircle(P1);
+    const p2 = setCircle(P2);
+    const p3 = setCircle(P3);
 
     // Main load line: head -> upper pulley -> direction pulley -> capstan.
     const slack = Math.max(0, 1 - theta/(Math.PI/2));
@@ -200,17 +196,20 @@
 
     $("ropeA").setAttribute("d", path([
       [B.x + L*Math.cos(theta), B.y, baseZ + L*Math.sin(theta)],
-      [365,75,285],
-      [435,75,285]
+      P1,
+      P3,
+      [590,325,45],
+      [650,350,0]
     ]));
 
     $("ropeB").setAttribute("d", path([
       [B.x + L*Math.cos(theta), B.y, baseZ + L*Math.sin(theta)],
-      [500,285,145]
+      P2,
+      P3
     ]));
 
     $("ropeC").setAttribute("d", path([
-      [500,285,145],[590,325,45],[650,350,0]
+      P3,[590,325,45],[650,350,0]
     ]));
 
     $("ropeD").setAttribute("d", path([
@@ -219,7 +218,7 @@
     ]));
 
     $("ropeHighlight").setAttribute("d",
-      path([[B.x + L*Math.cos(theta), B.y, baseZ + L*Math.sin(theta)],[365,75,285]]));
+      path([[B.x + L*Math.cos(theta), B.y, baseZ + L*Math.sin(theta)],P1]));
 
     // Make the pulleys rotate as rope passes over them.
     const spin = (-theta*180/Math.PI*2.4).toFixed(1);
