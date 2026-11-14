@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <title>Dikilitaşın Dikilişi — 390 CE</title>
-  <meta name="description" content="İstanbul Hipodromu'ndaki Theodosius Dikilitaşı'nın 390 CE'de kaldırılışını anlatan kısa tarihsel rekonstrüksiyon animasyonu.">
+  <meta name="description" content="İstanbul Hipodromu'ndaki Theodosius Dikilitaşı'nın kaldırılışını gösteren kısa tarihsel rekonstrüksiyon animasyonu.">
   <link rel="stylesheet" href="./src/style.css">
 </head>
 <body>
@@ -13,13 +13,13 @@
       <div>
         <p class="eyebrow">HİPODROM • CONSTANTINOPLE • 390 CE</p>
         <h1>Dikilitaş nasıl dikildi?</h1>
-        <p class="lede">Theodosius Dikilitaşı'nın kaldırılışını, kaidedeki tarihî kabartmadan esinlenen basitleştirilmiş bir mühendislik rekonstrüksiyonu olarak izleyin.</p>
+        <p class="lede">Dikilitaş önce yere paralel konumda hazırlanır; ardından halat ve makara sistemiyle tek sürekli kaldırma hareketinde dik konuma getirilir.</p>
       </div>
       <div class="badge">RECONSTRUCTION 01</div>
     </header>
 
     <section class="stage-wrap" aria-label="Dikilitaş kaldırma animasyonu">
-      <svg id="scene" viewBox="0 0 1200 700" role="img" aria-label="Halat ve makaralarla dikilen dikilitaş">
+      <svg id="scene" viewBox="0 0 1200 700" role="img" aria-label="Yere paralel duran dikilitaşın halat ve makaralarla dikilmesi">
         <defs>
           <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0" stop-color="#dce9ef"/>
@@ -44,7 +44,6 @@
         <path d="M0 520 Q210 470 420 520 T850 510 T1200 520 V700 H0Z" fill="#d8c7a9"/>
         <path d="M0 575 H1200 V700 H0Z" fill="#c6ad8c"/>
 
-        <!-- Hippodrome ground -->
         <path d="M0 590 H1200" stroke="#806b54" stroke-width="5" opacity=".55"/>
         <g opacity=".18">
           <path d="M0 615 H1200 M0 640 H1200 M0 665 H1200" stroke="#725c47" stroke-width="2"/>
@@ -58,7 +57,7 @@
           <rect x="550" y="425" width="100" height="25" fill="#a78f7b"/>
         </g>
 
-        <!-- relief hint -->
+        <!-- simplified relief hint -->
         <g opacity=".22" fill="none" stroke="#604d3f" stroke-width="4">
           <circle cx="560" cy="468" r="9"/><circle cx="590" cy="468" r="9"/><circle cx="620" cy="468" r="9"/>
           <path d="M548 478 Q590 450 635 478"/>
@@ -86,32 +85,49 @@
           <circle r="11" fill="#cdbb9e" stroke="#3f3832" stroke-width="5"/>
         </g>
 
-        <!-- obelisk pivot -->
-        <g id="obelisk" transform="translate(600 425)">
-          <g transform="rotate(-90)">
-            <path d="M-13 0 L-29 -330 L29 -330 L13 0 Z" fill="url(#stone)" stroke="#59483c" stroke-width="4"/>
-            <path d="M-22 -325 L0 -355 L22 -325" fill="#a99078" stroke="#59483c" stroke-width="4"/>
-            <path d="M-8 -20 L-18 -305 M8 -20 L18 -305" stroke="#d8c1a6" stroke-width="4" opacity=".35"/>
-            <path d="M-14 -300 L14 -300 M-15 -280 L15 -280 M-16 -260 L16 -260" stroke="#5e4b3e" stroke-width="3" opacity=".28"/>
-          </g>
+        <!--
+          The obelisk's local origin is its foot.
+          Local shaft runs upward from (0,0) to (0,-355).
+          JS rotates this whole group around the foot:
+          90° = horizontal on the ground, 0° = vertical on the pedestal.
+        -->
+        <g id="obelisk" transform="translate(600 590) rotate(90)">
+          <path d="M-13 0 L-29 -330 L29 -330 L13 0 Z"
+                fill="url(#stone)" stroke="#59483c" stroke-width="4"/>
+          <path d="M-22 -325 L0 -355 L22 -325"
+                fill="#a99078" stroke="#59483c" stroke-width="4"/>
+          <path d="M-8 -20 L-18 -305 M8 -20 L18 -305"
+                stroke="#d8c1a6" stroke-width="4" opacity=".35"/>
+          <path d="M-14 -300 L14 -300 M-15 -280 L15 -280 M-16 -260 L16 -260"
+                stroke="#5e4b3e" stroke-width="3" opacity=".28"/>
           <circle cx="0" cy="0" r="16" fill="#4c3b30" stroke="#c7ad8f" stroke-width="6"/>
         </g>
 
-        <!-- rope from top pulley to obelisk head -->
-        <path id="ropeLift" d="M600 190 L600 95 L600 95" fill="none" stroke="#3d3028" stroke-width="7"/>
-        <path id="ropeHaul" d="M600 190 C650 250 700 300 745 355 L930 510" fill="none" stroke="#3d3028" stroke-width="7"/>
+        <!-- lifting rope attached to the obelisk head -->
+        <path id="ropeLift" d="M600 190 L600 95 L955 590"
+              fill="none" stroke="#3d3028" stroke-width="7"/>
+
+        <!-- hauling rope -->
+        <path id="ropeHaul" d="M600 190 C650 250 700 300 745 355 L930 510"
+              fill="none" stroke="#3d3028" stroke-width="7"/>
         <path d="M930 510 L930 585" stroke="#3d3028" stroke-width="7"/>
 
         <!-- workers -->
         <g id="workers" fill="#4e3e34">
           <g transform="translate(915 555)">
-            <circle cy="-28" r="10"/><path d="M0 -18 L0 18 M0 -4 L-18 12 M0 -4 L18 7 M0 18 L-15 42 M0 18 L15 42" stroke="#4e3e34" stroke-width="8" fill="none" stroke-linecap="round"/>
+            <circle cy="-28" r="10"/>
+            <path d="M0 -18 L0 18 M0 -4 L-18 12 M0 -4 L18 7 M0 18 L-15 42 M0 18 L15 42"
+                  stroke="#4e3e34" stroke-width="8" fill="none" stroke-linecap="round"/>
           </g>
           <g transform="translate(970 555)">
-            <circle cy="-28" r="10"/><path d="M0 -18 L0 18 M0 -4 L-18 12 M0 -4 L18 7 M0 18 L-15 42 M0 18 L15 42" stroke="#4e3e34" stroke-width="8" fill="none" stroke-linecap="round"/>
+            <circle cy="-28" r="10"/>
+            <path d="M0 -18 L0 18 M0 -4 L-18 12 M0 -4 L18 7 M0 18 L-15 42 M0 18 L15 42"
+                  stroke="#4e3e34" stroke-width="8" fill="none" stroke-linecap="round"/>
           </g>
           <g transform="translate(1025 555)">
-            <circle cy="-28" r="10"/><path d="M0 -18 L0 18 M0 -4 L-18 12 M0 -4 L18 7 M0 18 L-15 42 M0 18 L15 42" stroke="#4e3e34" stroke-width="8" fill="none" stroke-linecap="round"/>
+            <circle cy="-28" r="10"/>
+            <path d="M0 -18 L0 18 M0 -4 L-18 12 M0 -4 L18 7 M0 18 L-15 42 M0 18 L15 42"
+                  stroke="#4e3e34" stroke-width="8" fill="none" stroke-linecap="round"/>
           </g>
         </g>
 
@@ -132,7 +148,7 @@
       <div class="overlay">
         <div>
           <span class="kicker">CANLI REKONSTRÜKSİYON</span>
-          <strong id="phase">Hazırlık</strong>
+          <strong id="phase">Yatay konum — hazırlık</strong>
         </div>
         <div class="timer"><span id="time">0.0</span>s</div>
       </div>
@@ -156,7 +172,7 @@
 
     <footer>
       <span>reconstruction1</span>
-      <span>Historical visualization • v0.1</span>
+      <span>Historical visualization • v0.2</span>
     </footer>
   </main>
   <script src="./src/animation.js"></script>
