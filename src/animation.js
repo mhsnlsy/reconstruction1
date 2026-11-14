@@ -9,9 +9,8 @@
   const speed = document.getElementById("speed");
   const speedValue = document.getElementById("speedValue");
 
-  // 12.5 s at 1.0x; at the default 0.95x it is ~13.2 s.
   const DURATION = 12.5;
-  const HOLD = 0.22; // first 22%: stone remains horizontal on the ground
+  const HOLD = 0.20;
   let t = 0;
   let running = false;
   let last = performance.now();
@@ -25,44 +24,43 @@
   function setScene(seconds) {
     const p = Math.min(1, Math.max(0, seconds / DURATION));
 
-    // The stone starts completely horizontal on the ground.
-    // Then its foot rises from the ground/pedestal level while the shaft
-    // rotates around the foot until it is vertical.
+    // Isometric scene: the stone begins flat on the ground.
+    // It rotates around its foot; the pivot also moves toward the pedestal
+    // during the final placement.
     let angle = 90;
-    let pivotX = 600;
-    let pivotY = 590;
+    let pivotX = 470;
+    let pivotY = 545;
 
     if (p > HOLD) {
       const liftP = (p - HOLD) / (1 - HOLD);
       const eased = easeInOut(liftP);
       angle = 90 - 90 * eased;
-      pivotY = 590 - 165 * eased;
+
+      // Foot travels slightly toward the pedestal while rising.
+      pivotX = 470 + 130 * eased;
+      pivotY = 545 - 120 * eased;
     }
 
     obelisk.setAttribute(
       "transform",
-      "translate(" + pivotX + " " + pivotY + ") rotate(" + angle + ")"
+      "translate(" + pivotX.toFixed(1) + " " + pivotY.toFixed(1) + ") rotate(" + angle.toFixed(2) + ")"
     );
 
-    // Obelisk head in world coordinates. The local shaft runs from
-    // (0,0) to (0,-355), so this point is always exactly on the stone.
+    // Local shaft tip is 355 px above the foot.
     const rad = angle * Math.PI / 180;
     const headX = pivotX + 355 * Math.sin(rad);
     const headY = pivotY - 355 * Math.cos(rad);
 
-    // Lifting rope stays attached to the upper end of the stone.
+    // Rope follows the actual head.
     ropeLift.setAttribute(
       "d",
-      "M600 190 L600 95 L" +
-        headX.toFixed(1) +
-        " " +
-        headY.toFixed(1)
+      "M600 190 L600 95 L" + headX.toFixed(1) + " " + headY.toFixed(1)
     );
 
     let text = "Yatay konum — hazırlık";
-    if (p >= HOLD && p < 0.48) text = "Dikilitaş kaldırılıyor";
-    else if (p < 0.88) text = "Dikilitaş dikiliyor";
-    else if (p < 0.99) text = "Kaideye oturtuluyor";
+    if (p >= HOLD && p < 0.48) text = "Halatlar geriliyor";
+    else if (p < 0.82) text = "Dikilitaş kaldırılıyor";
+    else if (p < 0.96) text = "Kaideye hizalanıyor";
     else text = "Dikilitaş dikildi";
 
     phase.textContent = text;
@@ -73,19 +71,15 @@
   function tick(now) {
     const dt = Math.min(0.05, (now - last) / 1000);
     last = now;
-
     if (running) {
       t += dt * Number(speed.value);
-
       if (t >= DURATION) {
         t = DURATION;
         running = false;
         play.textContent = "▶ Tekrar oynat";
       }
-
       setScene(t);
     }
-
     requestAnimationFrame(tick);
   }
 
