@@ -1,7 +1,6 @@
 (() => {
   const obelisk = document.getElementById("obelisk");
   const ropeLift = document.getElementById("ropeLift");
-  const ropeHaul = document.getElementById("ropeHaul");
   const phase = document.getElementById("phase");
   const timeEl = document.getElementById("time");
   const bar = document.getElementById("bar");
@@ -10,38 +9,60 @@
   const speed = document.getElementById("speed");
   const speedValue = document.getElementById("speedValue");
 
-  const DURATION = 12.0; // seconds at 1.0x
+  // 12.5 s at 1.0x; at the default 0.95x it is ~13.2 s.
+  const DURATION = 12.5;
+  const HOLD = 0.22; // first 22%: stone remains horizontal on the ground
   let t = 0;
   let running = false;
   let last = performance.now();
 
   function easeInOut(x) {
-    return x < 0.5 ? 2*x*x : 1 - Math.pow(-2*x + 2, 2)/2;
+    return x < 0.5
+      ? 2 * x * x
+      : 1 - Math.pow(-2 * x + 2, 2) / 2;
   }
 
   function setScene(seconds) {
     const p = Math.min(1, Math.max(0, seconds / DURATION));
-    const eased = easeInOut(p);
 
-    // One continuous lift: from horizontal (-90°) to vertical (0°).
-    const angle = -90 + 90 * eased;
-    obelisk.setAttribute("transform", "translate(600 425) rotate(" + angle + ")");
+    // The stone starts completely horizontal on the ground.
+    // Then its foot rises from the ground/pedestal level while the shaft
+    // rotates around the foot until it is vertical.
+    let angle = 90;
+    let pivotX = 600;
+    let pivotY = 590;
 
-    // Keep the lifting rope visually attached to the moving head.
-    const rad = angle * Math.PI / 180;
-    const headX = 600 + Math.sin(rad) * 330;
-    const headY = 425 - Math.cos(rad) * 330;
-    ropeLift.setAttribute("d", "M600 190 L600 95 L" + headX.toFixed(1) + " " + headY.toFixed(1));
+    if (p > HOLD) {
+      const liftP = (p - HOLD) / (1 - HOLD);
+      const eased = easeInOut(liftP);
+      angle = 90 - 90 * eased;
+      pivotY = 590 - 165 * eased;
+    }
 
-    // Hauling rope follows the top pulley into the capstan/crew.
-    ropeHaul.setAttribute("d",
-      "M600 190 C650 250 700 300 745 355 L930 510"
+    obelisk.setAttribute(
+      "transform",
+      "translate(" + pivotX + " " + pivotY + ") rotate(" + angle + ")"
     );
 
-    let text = "Hazırlık";
-    if (p < .12) text = "Halatlar geriliyor";
-    else if (p < .72) text = "Dikilitaş kaldırılıyor";
-    else if (p < .94) text = "Son derece";
+    // Obelisk head in world coordinates. The local shaft runs from
+    // (0,0) to (0,-355), so this point is always exactly on the stone.
+    const rad = angle * Math.PI / 180;
+    const headX = pivotX + 355 * Math.sin(rad);
+    const headY = pivotY - 355 * Math.cos(rad);
+
+    // Lifting rope stays attached to the upper end of the stone.
+    ropeLift.setAttribute(
+      "d",
+      "M600 190 L600 95 L" +
+        headX.toFixed(1) +
+        " " +
+        headY.toFixed(1)
+    );
+
+    let text = "Yatay konum — hazırlık";
+    if (p >= HOLD && p < 0.48) text = "Dikilitaş kaldırılıyor";
+    else if (p < 0.88) text = "Dikilitaş dikiliyor";
+    else if (p < 0.99) text = "Kaideye oturtuluyor";
     else text = "Dikilitaş dikildi";
 
     phase.textContent = text;
@@ -52,15 +73,19 @@
   function tick(now) {
     const dt = Math.min(0.05, (now - last) / 1000);
     last = now;
+
     if (running) {
       t += dt * Number(speed.value);
+
       if (t >= DURATION) {
         t = DURATION;
         running = false;
         play.textContent = "▶ Tekrar oynat";
       }
+
       setScene(t);
     }
+
     requestAnimationFrame(tick);
   }
 
