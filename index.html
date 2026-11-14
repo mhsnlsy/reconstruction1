@@ -3,198 +3,26 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Dikilitaşın Dikilişi — İzometrik Rekonstrüksiyon</title>
-<meta name="description" content="Theodosius Dikilitaşı'nın yüksek bakışlı izometrik mühendislik rekonstrüksiyonu.">
-<link rel="stylesheet" href="./src/style.css">
+<meta http-equiv="refresh" content="0;url=https://dogancansk-cloud.github.io/visuals/dikilitas_3d.html">
+<title>Dikilitaş nasıl dikildi? — 3B rekonstrüksiyon</title>
+<meta name="description" content="Theodosius Dikilitaşı'nın kaynaklı, etkileşimli 3B rekonstrüksiyonu.">
+<style>
+*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;background:#121a20;color:#eee;font:16px system-ui,sans-serif;padding:24px}
+main{max-width:560px;text-align:center;background:#202a31;border:1px solid #48535b;border-radius:22px;padding:30px;box-shadow:0 20px 60px #0006}
+h1{font-size:clamp(25px,6vw,38px);margin:0 0 12px}p{color:#bdc5c9;line-height:1.55}
+a{display:inline-block;margin-top:12px;background:#b58a5d;color:#111;text-decoration:none;font-weight:800;padding:14px 22px;border-radius:999px}
+small{display:block;margin-top:18px;color:#9aa4aa}
+</style>
 </head>
 <body>
-<main class="app">
-<header>
-  <div>
-    <p class="eyebrow">HİPODROM • CONSTANTINOPLE • 390 CE • İZOMETRİK REKONSTRÜKSİYON</p>
-    <h1>Dikilitaş nasıl dikildi?</h1>
-    <p class="lede">Sahneyi yüksekten, çapraz bir izometrik bakışla izliyoruz: yerde yatay duran taş, pivot noktasından kontrollü biçimde döndürülerek kaidenin üzerine alınıyor.</p>
-  </div>
-  <div class="badge">RECONSTRUCTION 04</div>
-</header>
-
-<section class="stage-wrap">
-<svg id="scene" viewBox="0 0 1200 700" role="img" aria-label="Yüksek bakışlı izometrik dikilitaş kaldırma rekonstrüksiyonu">
-<defs>
-  <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-    <stop offset="0" stop-color="#0d171f"/><stop offset="1" stop-color="#25363f"/>
-  </linearGradient>
-  <linearGradient id="ground" x1="0" y1="0" x2="1" y2="1">
-    <stop offset="0" stop-color="#9a8b78"/><stop offset="1" stop-color="#62574d"/>
-  </linearGradient>
-  <linearGradient id="marble" x1="0" y1="0" x2="1" y2="1">
-    <stop offset="0" stop-color="#e0d0bd"/><stop offset=".6" stop-color="#b7a38f"/><stop offset="1" stop-color="#887565"/>
-  </linearGradient>
-  <linearGradient id="stoneA" x1="0" y1="0" x2="1" y2="0">
-    <stop offset="0" stop-color="#c7af95"/><stop offset=".55" stop-color="#9f876f"/><stop offset="1" stop-color="#786455"/>
-  </linearGradient>
-  <linearGradient id="stoneB" x1="0" y1="0" x2="1" y2="1">
-    <stop offset="0" stop-color="#8e7764"/><stop offset="1" stop-color="#564941"/>
-  </linearGradient>
-  <linearGradient id="wood" x1="0" y1="0" x2="1" y2="1">
-    <stop offset="0" stop-color="#b17c4d"/><stop offset="1" stop-color="#4c3425"/>
-  </linearGradient>
-  <filter id="shadow" x="-30%" y="-30%" width="160%" height="180%">
-    <feDropShadow dx="0" dy="12" stdDeviation="12" flood-opacity=".38"/>
-  </filter>
-  <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-    <feGaussianBlur stdDeviation="5"/>
-  </filter>
-</defs>
-
-<rect width="1200" height="700" fill="url(#sky)"/>
-
-<!-- High-angle site plane: the camera reads the site diagonally rather than front-on. -->
-<g id="site">
-  <polygon id="ground" points="0,0 0,0 0,0 0,0" fill="url(#ground)"/>
-  <g id="grid" opacity=".18" stroke="#ead9bd" stroke-width="2"></g>
-
-  <!-- contextual Hippodrome geometry -->
-  <g opacity=".42" fill="#c4b39e" stroke="#4c433b" stroke-width="2">
-    <polygon points="170,410 310,490 260,520 120,440"/>
-    <polygon points="850,500 1030,605 950,645 770,540"/>
-    <polygon points="260,255 410,170 470,205 320,295"/>
-    <polygon points="820,235 1000,135 1045,165 865,270"/>
-  </g>
-  <g opacity=".52" fill="#6e665e">
-    <circle cx="245" cy="430" r="22"/><circle cx="285" cy="455" r="17"/>
-    <circle cx="935" cy="550" r="23"/><circle cx="980" cy="580" r="18"/>
-    <circle cx="335" cy="235" r="18"/><circle cx="900" cy="195" r="20"/>
-  </g>
-</g>
-
-<!-- pedestal / socket -->
-<g id="pedestal" filter="url(#shadow)">
-  <polygon id="pedBaseTop" points="0,0 0,0 0,0 0,0" fill="#ded0bf"/>
-  <polygon id="pedBaseFront" points="0,0 0,0 0,0 0,0" fill="#9d8975"/>
-  <polygon id="pedBaseSide" points="0,0 0,0 0,0 0,0" fill="#736052"/>
-  <polygon id="pedUpperTop" points="0,0 0,0 0,0 0,0" fill="url(#marble)"/>
-  <polygon id="pedUpperFront" points="0,0 0,0 0,0 0,0" fill="#9f8975"/>
-  <polygon id="pedUpperSide" points="0,0 0,0 0,0 0,0" fill="#705b4d"/>
-  <ellipse id="socket" cx="0" cy="0" rx="18" ry="8" fill="#40362e" opacity=".75"/>
-</g>
-
-<!-- heavy timber erection frame -->
-<g id="frame" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <g stroke="#3e2c20" stroke-width="31" opacity=".72">
-    <line id="postBL"/><line id="postBR"/><line id="postFL"/><line id="postFR"/>
-  </g>
-  <g stroke="url(#wood)" stroke-width="24">
-    <line id="post2BL"/><line id="post2BR"/><line id="post2FL"/><line id="post2FR"/>
-    <line id="beamTopA"/><line id="beamTopB"/>
-    <line id="beamMidA"/><line id="beamMidB"/>
-  </g>
-  <g stroke="#c08a55" stroke-width="7" opacity=".8">
-    <line id="brace1"/><line id="brace2"/><line id="brace3"/><line id="brace4"/>
-  </g>
-</g>
-
-<!-- pulley blocks -->
-<g id="pulleyAssembly">
-  <g id="pulley1">
-    <circle id="p1" r="30" fill="#39342f" stroke="#c6b294" stroke-width="7"/>
-    <circle r="9" fill="#d5be9b" stroke="#312b27" stroke-width="4"/>
-    <path d="M-20,-20 L20,20 M20,-20 L-20,20" stroke="#726252" stroke-width="3" opacity=".8"/>
-  </g>
-  <g id="pulley2">
-    <circle id="p2" r="30" fill="#39342f" stroke="#c6b294" stroke-width="7"/>
-    <circle r="9" fill="#d5be9b" stroke="#312b27" stroke-width="4"/>
-    <path d="M-20,-20 L20,20 M20,-20 L-20,20" stroke="#726252" stroke-width="3" opacity=".8"/>
-  </g>
-  <g id="directionPulley">
-    <circle id="p3" r="25" fill="#3a3530" stroke="#b89e7d" stroke-width="6"/>
-    <circle r="8" fill="#d2b992" stroke="#302a25" stroke-width="4"/>
-  </g>
-</g>
-
-<!-- obelisk: four-sided stone, generated in true 3D/isometric projection by animation.js -->
-<g id="obelisk3d" filter="url(#shadow)">
-  <polygon id="obeliskFace1" points="0,0 0,0 0,0 0,0" fill="url(#stoneA)" stroke="#4e4138" stroke-width="2.5"/>
-  <polygon id="obeliskFace2" points="0,0 0,0 0,0 0,0" fill="url(#stoneB)" stroke="#4a3c34" stroke-width="2.5"/>
-  <polygon id="obeliskFace3" points="0,0 0,0 0,0 0,0" fill="#705b4d" stroke="#473a32" stroke-width="2"/>
-  <polygon id="obeliskFace4" points="0,0 0,0 0,0 0,0" fill="#a68d74" stroke="#4e4138" stroke-width="2"/>
-  <polygon id="obeliskCap" points="0,0 0,0 0,0 0,0" fill="#d0b397" stroke="#4e4138" stroke-width="2"/>
-  <path id="obeliskMark1" d="" stroke="#e1c7a7" stroke-width="3" opacity=".23"/>
-  <path id="obeliskMark2" d="" stroke="#4e4037" stroke-width="2.5" opacity=".22"/>
-  <ellipse id="pivot" cx="0" cy="0" rx="16" ry="9" fill="#352c26" stroke="#d0b18e" stroke-width="5"/>
-  <g id="collar">
-    <ellipse id="collarA" cx="0" cy="0" rx="22" ry="10" fill="none" stroke="#d0a575" stroke-width="5"/>
-    <path id="collarB" d="" stroke="#8f6947" stroke-width="4"/>
-  </g>
-</g>
-
-<!-- clearly visible rope paths -->
-<g id="ropes" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path id="ropeA" d="" stroke="#241d18" stroke-width="7"/>
-  <path id="ropeB" d="" stroke="#2c241e" stroke-width="6"/>
-  <path id="ropeC" d="" stroke="#211a16" stroke-width="6"/>
-  <path id="ropeD" d="" stroke="#191511" stroke-width="7"/>
-  <path id="ropeHighlight" d="" stroke="#b99469" stroke-width="2.2" opacity=".72"/>
-</g>
-
-<!-- hauling capstan and workers -->
-<g id="capstan">
-  <ellipse cx="0" cy="0" rx="44" ry="15" fill="#443126"/>
-  <rect x="-34" y="-9" width="68" height="24" rx="5" fill="#795338"/>
-  <ellipse cy="-9" rx="34" ry="13" fill="#a07047"/>
-  <path d="M-27,-5 L27,8 M-21,9 L31,-3" stroke="#d1a474" stroke-width="5"/>
-</g>
-
-<g id="workers" fill="#cdb99f" stroke="#302721" stroke-width="3">
-  <g id="worker1"><circle cy="-29" r="9"/><path d="M0 -20 L0 15 M0 -4 L-18 7 M0 -4 L20 2 M0 15 L-13 38 M0 15 L15 38" fill="none" stroke-width="7" stroke-linecap="round"/></g>
-  <g id="worker2"><circle cy="-29" r="9"/><path d="M0 -20 L0 15 M0 -4 L-18 7 M0 -4 L20 2 M0 15 L-13 38 M0 15 L15 38" fill="none" stroke-width="7" stroke-linecap="round"/></g>
-  <g id="worker3"><circle cy="-29" r="9"/><path d="M0 -20 L0 15 M0 -4 L-18 7 M0 -4 L20 2 M0 15 L-13 38 M0 15 L15 38" fill="none" stroke-width="7" stroke-linecap="round"/></g>
-</g>
-
-<g id="labels" font-family="system-ui,sans-serif">
-  <g>
-    <rect x="44" y="54" width="345" height="78" rx="13" fill="#0e171e" opacity=".88"/>
-    <text x="67" y="83" fill="#eadfce" font-size="16" font-weight="850">YÜKSEK BAKIŞ • İZOMETRİK</text>
-    <text x="67" y="108" fill="#b8ab9d" font-size="12">zemin planı • kaldırma sehpası • halat rotası</text>
-  </g>
-  <g>
-    <rect x="845" y="64" width="305" height="72" rx="13" fill="#0e171e" opacity=".88"/>
-    <text x="870" y="93" fill="#eadfce" font-size="15" font-weight="850">ÜST MAKARA BLOĞU</text>
-    <text x="870" y="117" fill="#b8ab9d" font-size="12">yük hattı burada yön değiştiriyor</text>
-  </g>
-  <g>
-    <rect x="52" y="555" width="325" height="78" rx="13" fill="#0e171e" opacity=".88"/>
-    <text x="75" y="584" fill="#eadfce" font-size="16" font-weight="850">DİKİLİTAŞ • 19,6 m</text>
-    <text x="75" y="609" fill="#b8ab9d" font-size="12">taşın başındaki kaldırma bağlantısı</text>
-  </g>
-  <g>
-    <rect x="850" y="400" width="300" height="78" rx="13" fill="#0e171e" opacity=".88"/>
-    <text x="875" y="429" fill="#eadfce" font-size="16" font-weight="850">ÇEKİŞ HATTI</text>
-    <text x="875" y="454" fill="#b8ab9d" font-size="12">makara → yön değişimi → kapstan</text>
-  </g>
-</g>
-</svg>
-
-<div class="overlay">
-  <div><span class="kicker">CANLI REKONSTRÜKSİYON</span><strong id="phase">Yatay konum — hazırlık</strong></div>
-  <div class="timer"><span id="time">0.0</span>s</div>
-</div>
-</section>
-
-<section class="controls">
-<button id="play" type="button">▶ Başlat</button>
-<button id="reset" type="button">↺ Baştan</button>
-<label class="speed">Hız <input id="speed" type="range" min="0.5" max="1.5" step="0.05" value="0.95"><output id="speedValue">0.95×</output></label>
-<div class="progress"><span id="bar"></span></div>
-</section>
-
-<section class="facts">
-<article><b>390 CE</b><span>Theodosius döneminde yeniden dikildi.</span></article>
-<article><b>30 / 32 gün</b><span>Latin ve Yunanca yazıtlar farklı süreler verir.</span></article>
-<article><b>⚙</b><span>Mekanizma, kaide kabartmalarındaki halat/kapstan sahnesinden ve antik kaldırma tekniklerinden esinlenen görsel bir rekonstrüksiyondur.</span></article>
-</section>
-<footer><span>reconstruction1</span><span>Historical visualization • v0.5</span></footer>
+<main>
+<h1>Dikilitaş nasıl dikildi?</h1>
+<p>Kaynakları, kabartma incelemesi ve iki farklı kaldırma senaryosu bulunan etkileşimli 3B rekonstrüksiyon açılıyor.</p>
+<a href="https://dogancansk-cloud.github.io/visuals/dikilitas_3d.html">3B rekonstrüksiyonu aç</a>
+<small>Görsel çalışma: Doğancan Işık · CC BY 4.0</small>
 </main>
-<script src="./src/animation.js?v=5" defer></script>
+<script>
+window.location.replace("https://dogancansk-cloud.github.io/visuals/dikilitas_3d.html");
+</script>
 </body>
 </html>
