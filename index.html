@@ -4,24 +4,141 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Dikilitaş Nasıl Dikildi? — Kaynak Temelli Rekonstrüksiyon</title>
-<style>
-*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#10171b}
-body{font-family:system-ui,-apple-system,Segoe UI,sans-serif}
-.wrap{position:fixed;inset:0;background:#10171b}
-iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#10171b}
-.top{position:absolute;z-index:5;left:16px;top:14px;max-width:min(470px,calc(100vw - 32px));padding:11px 14px;border:1px solid rgba(255,255,255,.13);border-radius:12px;background:rgba(10,15,18,.78);backdrop-filter:blur(12px);color:#fff;pointer-events:none}
-.k{font-size:10px;letter-spacing:.12em;font-weight:800;color:#c9b18e}.t{font-size:18px;font-weight:800;margin-top:3px}.s{font-size:11px;color:#b9b4ad;margin-top:4px;line-height:1.35}
-.source{position:absolute;z-index:5;right:16px;top:14px;padding:8px 11px;border:1px solid rgba(255,255,255,.13);border-radius:10px;background:rgba(10,15,18,.72);color:#c9c3bb;font-size:10px;pointer-events:none}
-@media(max-width:600px){.top{left:10px;top:10px}.source{display:none}.t{font-size:15px}}
-</style>
+<link rel="stylesheet" href="./src/style.css">
 </head>
 <body>
-<div class="wrap">
-<iframe title="Dikilitaş kaynak temelli 3B rekonstrüksiyonu"
-src="https://dogancansk-cloud.github.io/visuals/dikilitas_3d.html?mode=cap&clean=1"
-allow="fullscreen"></iframe>
-<div class="top"><div class="k">KAYNAK TEMELLİ 3B REKONSTRÜKSİYON</div><div class="t">Dikilitaş nasıl dikildi?</div><div class="s">Kabartmadaki bocurgatlar, halatlar ve kaldırma düzeni esas alınmıştır. Ara hareketler rekonstrüksiyondur.</div></div>
-<div class="source">Visuals · dogancansk-cloud</div>
+<div class="app">
+<header>
+  <div>
+    <p class="eyebrow">KAYNAK TEMELLİ 3B REKONSTRÜKSİYON</p>
+    <h1>Dikilitaş nasıl dikildi?</h1>
+    <p class="lede">Theodosius Dikilitaşı'nın Hipodrom'daki kaldırılışını, kuzey kabartmasında görülen tekerlek–halat–bocurgat düzeni üzerinden canlandıran animasyon.</p>
+  </div>
+  <div class="badge">390 CE · 30 / 32 GÜN</div>
+</header>
+
+<section class="stage-wrap">
+<svg id="scene" viewBox="0 0 1220 700" role="img" aria-label="Theodosius Dikilitaşı'nın yataydan dikey konuma kaldırılmasının izometrik rekonstrüksiyonu">
+<defs>
+ <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#172832"/><stop offset="1" stop-color="#0f171c"/></linearGradient>
+ <linearGradient id="stone" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#b79b79"/><stop offset=".5" stop-color="#806b54"/><stop offset="1" stop-color="#51453a"/></linearGradient>
+ <linearGradient id="stoneSide" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#695844"/><stop offset="1" stop-color="#3f372f"/></linearGradient>
+ <linearGradient id="wood" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8e6847"/><stop offset="1" stop-color="#3e2c20"/></linearGradient>
+ <linearGradient id="rope" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#d0b084"/><stop offset=".5" stop-color="#6f5136"/><stop offset="1" stop-color="#291f18"/></linearGradient>
+ <filter id="shadow"><feGaussianBlur stdDeviation="7"/></filter>
+ <filter id="soft"><feGaussianBlur stdDeviation="1.5"/></filter>
+ <pattern id="granite" width="18" height="18" patternUnits="userSpaceOnUse"><circle cx="3" cy="5" r="1" fill="#d5bea0" opacity=".18"/><circle cx="12" cy="11" r=".8" fill="#201b17" opacity=".22"/><circle cx="16" cy="3" r=".6" fill="#d5bea0" opacity=".15"/></pattern>
+</defs>
+
+<rect width="1220" height="700" fill="url(#sky)"/>
+<ellipse cx="610" cy="595" rx="520" ry="58" fill="#000" opacity=".38" filter="url(#shadow)"/>
+<polygon id="ground" fill="#243239" stroke="#455159" stroke-width="1"/>
+<g id="grid" opacity=".22" stroke="#899196" stroke-width="1"></g>
+
+<!-- Historical-style erection frame -->
+<g fill="none" stroke="url(#wood)" stroke-linecap="round">
+ <g stroke-width="13">
+  <line id="postBL"/><line id="postBR"/><line id="postFL"/><line id="postFR"/>
+  <line id="beamTopA"/><line id="beamTopB"/><line id="beamMidA"/><line id="beamMidB"/>
+ </g>
+ <g stroke="#3b2920" stroke-width="5" opacity=".9">
+  <line id="brace1"/><line id="brace2"/><line id="brace3"/><line id="brace4"/>
+ </g>
+</g>
+<g fill="#d1b28c" opacity=".7">
+ <circle cx="0" cy="0" r="1"/>
+</g>
+
+<!-- Pulley housings -->
+<g id="pulley1"><circle r="27" fill="#241c17" stroke="#b68e61" stroke-width="4"/><circle r="16" fill="#5b4534"/><circle r="5" fill="#d0b084"/><path d="M-21 0H21" stroke="#d0b084" stroke-width="3"/></g>
+<g id="pulley2"><circle r="27" fill="#241c17" stroke="#b68e61" stroke-width="4"/><circle r="16" fill="#5b4534"/><circle r="5" fill="#d0b084"/><path d="M-21 0H21" stroke="#d0b084" stroke-width="3"/></g>
+<g id="directionPulley"><circle r="24" fill="#241c17" stroke="#b68e61" stroke-width="4"/><circle r="13" fill="#5b4534"/><circle r="4" fill="#d0b084"/></g>
+
+<!-- Pedestal -->
+<polygon id="pedBaseTop" fill="#aa9276" stroke="#d0bda5" stroke-width="2"/>
+<polygon id="pedBaseFront" fill="#765f49" stroke="#b29b80"/>
+<polygon id="pedBaseSide" fill="#554637" stroke="#8e755c"/>
+<polygon id="pedUpperTop" fill="#c2a98a" stroke="#dfccb3"/>
+<polygon id="pedUpperFront" fill="#8d7258" stroke="#b89d7d"/>
+<polygon id="pedUpperSide" fill="#62503f" stroke="#967b61"/>
+<circle id="socket" r="11" fill="#211b17" stroke="#d2b58c" stroke-width="3"/>
+
+<!-- Obelisk -->
+<g id="obeliskGroup">
+ <polygon id="obeliskFace1" fill="url(#stone)" stroke="#d4b993" stroke-width="1.4"/>
+ <polygon id="obeliskFace2" fill="url(#stoneSide)" stroke="#a68b6b" stroke-width="1.2"/>
+ <polygon id="obeliskFace3" fill="#5a4a3b" stroke="#8f765c" stroke-width="1"/>
+ <polygon id="obeliskFace4" fill="#40372f" stroke="#75604d" stroke-width="1"/>
+ <polygon id="obeliskCap" fill="#c3a17a" stroke="#e0c59e" stroke-width="1.5"/>
+ <path id="obeliskMark1" stroke="#d7bd97" stroke-width="2" opacity=".42"/>
+ <path id="obeliskMark2" stroke="#241d18" stroke-width="2" opacity=".3"/>
+ <circle id="pivot" r="12" fill="#1f1915" stroke="#d4b58b" stroke-width="3"/>
+ <circle id="collarA" r="10" fill="#2a211b" stroke="#c8a67b" stroke-width="3"/>
+ <path id="collarB" stroke="#d0ad80" stroke-width="5" opacity=".8"/>
+</g>
+
+<!-- Foot wheel -->
+<g id="footWheel"><circle r="34" fill="#2a211b" stroke="#c09a6b" stroke-width="5"/><circle r="25" fill="none" stroke="#72563d" stroke-width="5"/><circle r="7" fill="#d1b18a"/><path d="M-27 0H27M0-27V27" stroke="#72563d" stroke-width="4"/></g>
+
+<!-- Ropes -->
+<g fill="none" stroke="url(#rope)" stroke-width="6" stroke-linecap="round">
+ <path id="ropeA"/><path id="ropeB"/><path id="ropeC"/><path id="ropeD"/>
+ <path id="ropeHighlight" stroke="#e2c596" stroke-width="2.2" opacity=".65"/>
+</g>
+
+<!-- Capstan + two crews -->
+<g id="capstan">
+ <ellipse rx="43" ry="16" fill="#241c17" stroke="#a67d53" stroke-width="4"/>
+ <rect x="-34" y="-7" width="68" height="22" rx="8" fill="#69472f"/>
+ <circle cy="4" r="14" fill="#2b211a" stroke="#b88b5e" stroke-width="3"/>
+ <path d="M-57 4L57 4M0-29V37" stroke="#b88b5e" stroke-width="6" stroke-linecap="round"/>
+</g>
+<g id="worker1" fill="#b99670" stroke="#251d18" stroke-width="2"><circle cy="-25" r="9"/><path d="M0-16L-2 8M-2-7L-18 4M-2-7L16 2M-2 8L-12 25M-2 8L12 23" fill="none" stroke-width="6"/></g>
+<g id="worker2" fill="#b99670" stroke="#251d18" stroke-width="2"><circle cy="-25" r="9"/><path d="M0-16L-2 8M-2-7L-18 4M-2-7L16 2M-2 8L-12 25M-2 8L12 23" fill="none" stroke-width="6"/></g>
+<g id="worker3" fill="#b99670" stroke="#251d18" stroke-width="2"><circle cy="-25" r="9"/><path d="M0-16L-2 8M-2-7L-18 4M-2-7L16 2M-2 8L-12 25M-2 8L12 23" fill="none" stroke-width="6"/></g>
+
+<!-- Labels -->
+<g font-family="system-ui,sans-serif">
+ <g transform="translate(64 82)">
+  <rect width="250" height="62" rx="12" fill="#0b1115" fill-opacity=".82" stroke="#5b5045"/>
+  <text x="16" y="23" fill="#d2b18a" font-size="10" font-weight="800" letter-spacing="1.4">KUZey KABARTMASI</text>
+  <text x="16" y="43" fill="#eee7dc" font-size="12">Tekerlek + iki çekme grubu</text>
+ </g>
+ <g transform="translate(900 82)">
+  <rect width="255" height="82" rx="12" fill="#0b1115" fill-opacity=".82" stroke="#5b5045"/>
+  <text x="16" y="23" fill="#d2b18a" font-size="10" font-weight="800" letter-spacing="1.4">TARİHSEL VERİ</text>
+  <text x="16" y="44" fill="#eee7dc" font-size="12">Latin: 30 gün</text>
+  <text x="16" y="63" fill="#eee7dc" font-size="12">Yunanca: 32 gün</text>
+ </g>
+ <g transform="translate(64 575)">
+  <rect width="325" height="67" rx="12" fill="#0b1115" fill-opacity=".84" stroke="#5b5045"/>
+  <text x="16" y="23" fill="#d2b18a" font-size="10" font-weight="800">REKONSTRÜKSİYON NOTU</text>
+  <text x="16" y="43" fill="#bdb5ac" font-size="11">Kaynaklar mekanizmanın özünü verir;</text>
+  <text x="16" y="58" fill="#bdb5ac" font-size="11">ara bağlantılar görsel rekonstrüksiyondur.</text>
+ </g>
+</g>
+</svg>
+
+<div class="overlay">
+ <div><span class="kicker">THEODOSIUS · HİPODROM</span><strong id="phase">Yatay konum — hazırlık</strong></div>
+ <div class="timer"><span id="time">0.0</span> s</div>
 </div>
+</section>
+
+<div class="controls">
+ <button id="play">▶ Başlat</button>
+ <button id="reset">↺ Baştan</button>
+ <label class="speed">Hız <input id="speed" type="range" min=".5" max="1.5" step=".05" value=".95"><output id="speedValue">0.95×</output></label>
+ <div class="progress"><span id="bar"></span></div>
+</div>
+
+<div class="facts">
+ <article><b>Kaynakta açıkça görülen</b><span>Ayak bir tekerleğe bağlı; iki işçi grubu halatlarla bocurgatları çekiyor.</span></article>
+ <article><b>Animasyon</b><span>Taş yatay başlar ve 13 saniyede tek bir sürekli kaldırma hareketiyle dikilir.</span></article>
+ <article><b>Kaynaklar</b><span>Wace &amp; Traquair · Safran · Ammianus · Marcellinus Comes · Budge · Özaltın ve diğerleri.</span></article>
+</div>
+<footer><span>Kaynak temelli rekonstrüksiyon · kesin olmayan ara ayrıntılar ayrıca belirtilmiştir.</span><span>Visuals / reconstruction1</span></footer>
+</div>
+<script src="./src/animation.js?v=10"></script>
 </body>
 </html>
