@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <title>Dikilitaşın Dikilişi — 390 CE</title>
+  <title>Dikilitaşın Dikilişi — İzometrik Rekonstrüksiyon</title>
   <meta name="description" content="İstanbul Hipodromu'ndaki Theodosius Dikilitaşı'nın kaldırılışını gösteren kısa tarihsel rekonstrüksiyon animasyonu.">
   <link rel="stylesheet" href="./src/style.css">
 </head>
@@ -11,15 +11,15 @@
   <main class="app">
     <header>
       <div>
-        <p class="eyebrow">HİPODROM • CONSTANTINOPLE • 390 CE</p>
+        <p class="eyebrow">HİPODROM • CONSTANTINOPLE • 390 CE • İZOMETRİK</p>
         <h1>Dikilitaş nasıl dikildi?</h1>
-        <p class="lede">Dikilitaş önce yere paralel konumda hazırlanır; ardından halat ve makara sistemiyle tek sürekli kaldırma hareketinde dik konuma getirilir.</p>
+        <p class="lede">İzometrik bakışta dikilitaşın yere paralel başlangıç konumundan, halat ve makara sistemiyle tek sürekli kaldırılışını izleyin.</p>
       </div>
-      <div class="badge">RECONSTRUCTION 01</div>
+      <div class="badge">RECONSTRUCTION 02</div>
     </header>
 
     <section class="stage-wrap" aria-label="Dikilitaş kaldırma animasyonu">
-      <svg id="scene" viewBox="0 0 1200 700" role="img" aria-label="Yere paralel duran dikilitaşın halat ve makaralarla dikilmesi">
+      <svg id="scene" viewBox="0 0 1200 700" role="img" aria-label="İzometrik bakışta yere paralel duran dikilitaşın halat ve makaralarla dikilmesi">
         <defs>
           <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0" stop-color="#dce9ef"/>
@@ -40,6 +40,17 @@
         </defs>
 
         <rect width="1200" height="700" fill="url(#sky)"/>
+        <!-- isometric ground plane -->
+        <path d="M0 500 L430 360 L1200 485 L770 650 Z" fill="#d5c2a5" opacity=".72"/>
+        <path d="M0 535 L430 395 L1200 520 L770 685 Z" fill="#c3aa89" opacity=".9"/>
+        <g opacity=".24" stroke="#725c47" stroke-width="2" fill="none">
+          <path d="M70 548 L475 415 L1130 525"/>
+          <path d="M190 590 L545 470 L1000 545"/>
+          <path d="M320 630 L615 530 L875 570"/>
+          <path d="M180 480 L470 575"/>
+          <path d="M380 420 L720 610"/>
+          <path d="M610 430 L900 585"/>
+        </g>
         <circle cx="1000" cy="105" r="48" fill="#fff4cf" opacity=".8"/>
         <path d="M0 520 Q210 470 420 520 T850 510 T1200 520 V700 H0Z" fill="#d8c7a9"/>
         <path d="M0 575 H1200 V700 H0Z" fill="#c6ad8c"/>
@@ -49,18 +60,31 @@
           <path d="M0 615 H1200 M0 640 H1200 M0 665 H1200" stroke="#725c47" stroke-width="2"/>
         </g>
 
-        <!-- pedestal -->
-        <g filter="url(#shadow)">
-          <rect x="520" y="505" width="160" height="85" rx="3" fill="#bca995"/>
-          <rect x="500" y="485" width="200" height="25" fill="#9f8975"/>
-          <rect x="535" y="450" width="130" height="40" fill="#c9b7a5"/>
-          <rect x="550" y="425" width="100" height="25" fill="#a78f7b"/>
+        <!-- isometric pedestal -->
+        <g id="pedestal" filter="url(#shadow)">
+          <path d="M500 490 L560 468 L700 490 L640 514 Z" fill="#d1bdaa"/>
+          <path d="M500 490 L640 514 L640 590 L500 565 Z" fill="#a78f7b"/>
+          <path d="M640 514 L700 490 L700 565 L640 590 Z" fill="#8f7967"/>
+          <path d="M525 450 L575 432 L665 450 L615 469 Z" fill="#dbc8b6"/>
+          <path d="M525 450 L615 469 L615 500 L525 481 Z" fill="#b59f8c"/>
+          <path d="M615 469 L665 450 L665 481 L615 500 Z" fill="#988170"/>
+          <path d="M550 425 L585 412 L650 425 L615 438 Z" fill="#c7b19f"/>
+          <path d="M550 425 L615 438 L615 457 L550 444 Z" fill="#9f8875"/>
+          <path d="M615 438 L650 425 L650 444 L615 457 Z" fill="#85705f"/>
         </g>
 
-        <!-- simplified relief hint -->
+        <!-- relief hint -->
+        
         <g opacity=".22" fill="none" stroke="#604d3f" stroke-width="4">
           <circle cx="560" cy="468" r="9"/><circle cx="590" cy="468" r="9"/><circle cx="620" cy="468" r="9"/>
           <path d="M548 478 Q590 450 635 478"/>
+        </g>
+
+        <!-- timber A-frame, shown with depth for an isometric view -->
+        <g id="rigBack" stroke-linecap="round">
+          <path d="M405 480 L505 175 L575 480" stroke="#4e3828" stroke-width="24"/>
+          <path d="M865 480 L765 175 L695 480" stroke="#4e3828" stroke-width="24"/>
+          <path d="M490 235 H780" stroke="#59412e" stroke-width="20"/>
         </g>
 
         <!-- timber A-frame -->
@@ -70,6 +94,13 @@
           <path d="M455 230 H745" stroke="#6d4d35" stroke-width="20"/>
           <path d="M405 355 H795" stroke="#6d4d35" stroke-width="16"/>
           <path d="M390 475 H810" stroke="#4f3827" stroke-width="25"/>
+          <!-- depth braces -->
+          <path d="M470 170 L505 175 M730 170 L765 175 M405 355 L440 365 M795 355 L830 365" stroke="#8d6746" stroke-width="10"/>
+        </g>
+
+        <!-- top pulley + axle -->
+        <g opacity=".9">
+          <path d="M600 165 L635 178 L635 215 L600 202 Z" fill="#8d6746"/>
         </g>
 
         <!-- top pulley -->
@@ -77,6 +108,13 @@
           <circle r="39" fill="#6f6257" stroke="#3f3832" stroke-width="8"/>
           <circle r="14" fill="#cdbb9e" stroke="#3f3832" stroke-width="6"/>
           <path d="M-27 -27 L27 27 M-27 27 L27 -27" stroke="#d8c9b2" stroke-width="5" opacity=".7"/>
+        </g>
+
+        <!-- second pulley / direction change -->
+        <g transform="translate(760 355)">
+          <circle r="33" fill="#65584e" stroke="#3f3832" stroke-width="7"/>
+          <circle r="11" fill="#cdbb9e" stroke="#3f3832" stroke-width="5"/>
+          <path d="M-22 0 H22" stroke="#d8c9b2" stroke-width="4" opacity=".7"/>
         </g>
 
         <!-- hauling pulley -->
@@ -103,6 +141,8 @@
           <circle cx="0" cy="0" r="16" fill="#4c3b30" stroke="#c7ad8f" stroke-width="6"/>
         </g>
 
+        <!-- main lifting rope -->
+        <path id="ropeMainBack" d="M635 190 L675 205" fill="none" stroke="#59483c" stroke-width="7"/>
         <!-- lifting rope attached to the obelisk head -->
         <path id="ropeLift" d="M600 190 L600 95 L955 590"
               fill="none" stroke="#3d3028" stroke-width="7"/>
@@ -132,6 +172,11 @@
         </g>
 
         <g id="labels" font-family="system-ui, sans-serif">
+          <g>
+            <rect x="55" y="95" width="255" height="64" rx="12" fill="#fff" opacity=".88"/>
+            <text x="76" y="121" font-size="16" font-weight="800" fill="#3f342c">İZOMETRİK GÖRÜNÜM</text>
+            <text x="76" y="143" font-size="12" fill="#6b5a4e">zemin + ahşap düzenek + taş</text>
+          </g>
           <g id="labelPulley">
             <rect x="790" y="100" width="230" height="58" rx="12" fill="#fff" opacity=".9"/>
             <text x="812" y="126" font-size="17" font-weight="700" fill="#3f342c">MAKARA + HALAT</text>
@@ -172,7 +217,7 @@
 
     <footer>
       <span>reconstruction1</span>
-      <span>Historical visualization • v0.2</span>
+      <span>Historical visualization • v0.3</span>
     </footer>
   </main>
   <script src="./src/animation.js"></script>
