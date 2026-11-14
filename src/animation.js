@@ -257,6 +257,17 @@
     const result = setObelisk(theta);
     setRopes(theta,result.head);
 
+    // The hauling crew leans into the rope as tension rises.
+    const effort = p < HOLD ? 0 : Math.min(1, (p-HOLD)/0.55);
+    ["worker1","worker2","worker3"].forEach((id,i)=>{
+      const lean = (i===1 ? -2 : 2) * effort;
+      const lift = Math.sin((seconds*5.2)+i*1.7) * 1.2 * effort;
+      const base = [[-38,18],[5,35],[46,10]][i];
+      const c = iso(650,350,0);
+      $(id).setAttribute("transform",
+        "translate("+(c.x+base[0])+" "+(c.y+base[1]+lift)+") rotate("+lean+")");
+    });
+
     let label = "Yatay konum — hazırlık";
     if (p >= HOLD && p < .36) label = "Halatlar geriliyor";
     else if (p < .78) label = "Dikilitaş kaldırılıyor";
