@@ -141,7 +141,7 @@ scene.add(footWheel);
 const obeliskPivot=new THREE.Group();obeliskPivot.position.set(0,1.58,0);scene.add(obeliskPivot);
 const loader=new GLTFLoader();
 let obelisk=null, obeliskLength=16;
-loader.load("https://cdn.jsdelivr.net/gh/dogancansk-cloud/visuals@main/istanbul3d/models/dikilitas.web.glb",g=>{
+loader.load("./assets/dikilitas.web.glb",g=>{
  obelisk=g.scene;
  obelisk.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true}});
  const box3=new THREE.Box3().setFromObject(obelisk), size=box3.getSize(new THREE.Vector3()), center=box3.getCenter(new THREE.Vector3());
@@ -152,6 +152,9 @@ loader.load("https://cdn.jsdelivr.net/gh/dogancansk-cloud/visuals@main/istanbul3
  obeliskPivot.add(obelisk);
  obeliskLength=Math.max(b2.max.y-b2.min.y,18);
  setAngle(-Math.PI/2);
+}, undefined, err=>{
+ phase.textContent="Dikilitaş modeli yüklenemedi";
+ console.error("Dikilitaş GLB load error",err);
 });
 
 function setAngle(a){obeliskPivot.rotation.z=a}
